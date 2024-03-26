@@ -1,45 +1,26 @@
+import Appbar from "../components/Appbar";
 import BlogCard from "../components/BlogCard";
+import { useBlogs } from "../hooks";
 
 const Blogs = () => {
+  const { loading, blogs } = useBlogs();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div>
+      <Appbar />
       <div className="w-[80%] m-auto">
-        <BlogCard
-          title="How an ugly single page website makes $1000 a month without affiliate marketing"
-          authorName="Aditya S"
-          publishedDate="Dec 3,2003"
-          content="This is my first post. I am so excited to start my blogging journey. How an ugly single page website makes $1000 a month without affiliate marketingHow an ugly single page website makes $1000 a month without affiliate marketing How an ugly single page website makes $1000 a month without affiliate marketing"
-        />
-        <BlogCard
-          title="How an ugly single page website makes $1000 a month without affiliate marketing"
-          authorName="Aditya S"
-          publishedDate="Dec 3,2003"
-          content="This is my first post. I am so excited to start my blogging journey. How an ugly single page website makes $1000 a month without affiliate marketingHow an ugly single page website makes $1000 a month without affiliate marketing How an ugly single page website makes $1000 a month without affiliate marketing"
-        />
-        <BlogCard
-          title="How an ugly single page website makes $1000 a month without affiliate marketing"
-          authorName="Aditya S"
-          publishedDate="Dec 3,2003"
-          content="This is my first post. I am so excited to start my blogging journey. How an ugly single page website makes $1000 a month without affiliate marketingHow an ugly single page website makes $1000 a month without affiliate marketing How an ugly single page website makes $1000 a month without affiliate marketing"
-        />
-        <BlogCard
-          title="How an ugly single page website makes $1000 a month without affiliate marketing"
-          authorName="Aditya S"
-          publishedDate="Dec 3,2003"
-          content="This is my first post. I am so excited to start my blogging journey. How an ugly single page website makes $1000 a month without affiliate marketingHow an ugly single page website makes $1000 a month without affiliate marketing How an ugly single page website makes $1000 a month without affiliate marketing"
-        />
-        <BlogCard
-          title="How an ugly single page website makes $1000 a month without affiliate marketing"
-          authorName="Aditya S"
-          publishedDate="Dec 3,2003"
-          content="This is my first post. I am so excited to start my blogging journey. How an ugly single page website makes $1000 a month without affiliate marketingHow an ugly single page website makes $1000 a month without affiliate marketing How an ugly single page website makes $1000 a month without affiliate marketing"
-        />
-        <BlogCard
-          title="How an ugly single page website makes $1000 a month without affiliate marketing"
-          authorName="Aditya S"
-          publishedDate="Dec 3,2003"
-          content="This is my first post. I am so excited to start my blogging journey. How an ugly single page website makes $1000 a month without affiliate marketingHow an ugly single page website makes $1000 a month without affiliate marketing How an ugly single page website makes $1000 a month without affiliate marketing"
-        />
+        {blogs.map((blog) => (
+          <BlogCard
+            id={blog.id}
+            title={blog.title}
+            authorName={blog.author.name || "Anonymous"}
+            publishedDate={"Unknown"}
+            content={blog.content}
+          />
+        ))}
       </div>
     </div>
   );

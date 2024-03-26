@@ -1,11 +1,15 @@
+import { Link } from "react-router-dom";
+
 interface BlogCardProps {
   authorName: string;
   title: string;
   content: string;
   publishedDate: string;
+  id: number;
 }
 
 const BlogCard = ({
+  id,
   authorName,
   title,
   content,
@@ -14,34 +18,36 @@ const BlogCard = ({
   return (
     <>
       <div>
-        <div className="flex m-auto border-b-2 pb-3">
-          <div className="left flex-2 w-[80%]">
-            <div className="head flex mb-2 mt-2">
-              <div className="flex justify-center flex-col mr-2">
-                <Avatar name={authorName} />
+        <Link to={`/blog/${id}`}>
+          <div className="flex m-auto border-b-2 pb-3 cursor-pointer">
+            <div className="left flex-2 w-[80%]">
+              <div className="head flex mb-2 mt-2">
+                <div className="flex justify-center flex-col mr-2">
+                  <Avatar name={authorName} />
+                </div>
+                <div className="text-lg mr-1">{authorName}</div>
+                <div className="text-xs flex justify-center flex-col mr-1 text-gray-500">
+                  &#9679;
+                </div>
+                <div className="text-lg text-slate-600">{publishedDate}</div>
               </div>
-              <div className="text-lg mr-1">{authorName}</div>
-              <div className="text-xs flex justify-center flex-col mr-1 text-gray-500">
-                &#9679;
+              <h1 className="font-semibold text-2xl">{title}</h1>
+              <p>{content.slice(0, 200) + "..."}</p>
+              <div className="mt-2">
+                {`${Math.ceil(content.length / 100)} min`} read
               </div>
-              <div className="text-lg text-slate-600">{publishedDate}</div>
             </div>
-            <h1 className="font-semibold text-2xl">{title}</h1>
-            <p>{content.slice(0, 200) + "..."}</p>
-            <div className="mt-2">
-              {`${Math.ceil(content.length / 100)} min`} read
+            <div className="right flex flex-1 items-center justify-center">
+              <div>images</div>
             </div>
           </div>
-          <div className="right flex flex-1 items-center justify-center">
-            <div>images</div>
-          </div>
-        </div>
+        </Link>
       </div>
     </>
   );
 };
 
-function Avatar({ name }: { name: string }) {
+export function Avatar({ name }: { name: string }) {
   return (
     <div className="relative inline-flex items-center justify-center w-7 h-7 overflow-hidden bg-gray-300 rounded-full dark:bg-gray-300">
       <span className="font-medium text-gray-900 dark:text-gray-900">
